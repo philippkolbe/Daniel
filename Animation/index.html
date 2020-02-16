@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="fnOnload()">
+    <img id="img" width="500px" height="500px" src="hidden.jpg"/>
+</body>
+
+<script>
+    let img, width, startWidth, margin;
+    let interval;
+    function fnOnload() {
+        img = document.getElementById("img");
+        width = img.width;
+        startWidth = width;
+        margin = 0;
+        interval = setInterval(decreaseWidth, 1);
+    }
+
+    function decreaseWidth() {
+        if (width > 0) {
+            width -= 2;
+            img.width = width;
+            margin += 1;
+            img.style.marginLeft = margin + "px";
+        } else {
+            img.src = "1.jpg";
+            clearInterval(interval);
+            interval = setInterval(increaseWidth, 1);
+        }
+    }
+
+    function increaseWidth() {
+        if (width < startWidth) {
+            width += 2;
+            img.width = width;
+            margin -= 1;
+            img.style.marginLeft = margin + "px";
+        } else {
+            clearInterval(interval);
+        }
+    }
+</script>
+</html>

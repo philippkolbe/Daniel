@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Variablen</title>
+</head>
+
+<body>
+    <script>
+        var arr1 = createArray(1);
+        var arr2 = createArray(2);
+        var arr3 = createArray(3);
+        //1. array mit allen Zahlen von 0 bis 9 füllen
+        
+
+        logNumbers(arr1);
+        logNumbers(arr2);
+        logNumbers(arr3);
+
+        function createArray(factor) {
+            var arr = [];
+
+            for (var i = 0; i < 10; i++) {
+                arr.push(i*factor);
+            }
+
+            return arr;
+        }
+
+        function logNumbers(array) {
+            //schau alle zahlen im array an und checke ob gerade ist, dann log "Zahl" ist gerade
+            for (var i = 0; i < array.length; i++) {
+                var nr = array[i];
+                
+                if (nr % 2 === 0) {
+                    console.log(nr + " ist gerade!");
+                } else if (nr === 5) {
+                    console.log(nr + " ist keine Zahl!");
+                } else {
+                    console.log(nr + " ist ungerade!");
+                }
+            }
+        }
+    </script>
+    <p>
+        Hallo
+    </p>
+</body>
+</html>

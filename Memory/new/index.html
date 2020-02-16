@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./script.js"></script>
+    <title>Memory</title>
+</head>
+<body onload= "fnOnload()">
+    <svg width = "400px" height = "55px">
+        <g>
+            <circle r = "20px" fill  = "red" cx = "30" cy = "30" id = "cirred" stroke-width = "3px" stroke = "black"></circle>
+            <text x="30" y="30" text-anchor="middle" id="textred" stroke="rgb(255, 200, 50)" dy=".3em">0</text>
+        </g>
+        <g>
+            <circle r = "20px" fill  = "white" cx = "300" cy = "30" id = "cirblue" stroke-width = "3px" stroke = "black"></circle>
+            <text x="300" y="30" text-anchor="middle" id="textblue" stroke="rgb(50, 200, 255)" dy=".3em">0</text>
+        </g>    
+    </svg>
+
+    <table>
+        <tr>
+            <td><img src = ".\images\hidden.jpg" id = "1" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "2" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "3" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "4" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+        </tr>
+        <tr>
+            <td><img src = ".\images\hidden.jpg" id = "5" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "6" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "7" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "8" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+        </tr>
+        <tr>
+            <td><img src = ".\images\hidden.jpg" id = "9" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "10" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "11" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "12" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+        </tr>
+        <tr>
+            <td><img src = ".\images\hidden.jpg" id = "13" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "14" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "15" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+            <td><img src = ".\images\hidden.jpg" id = "16" alt = "Hidden" onclick = "onclickImage(this)"  width = "80px"></img></td>
+        </tr>
+    </table>
+    <a href = "./index.html"><button>restart</button></a>
+</body>
+</html>

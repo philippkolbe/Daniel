@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Memory</title>
+</head>
+
+<body onload="onload()">
+    <script>
+        const nrOfRows = 4;
+        const nrOfImgs = Math.pow(nrOfRows, 2);
+        const hiddenSource = "./images/hidden.jpg";
+        const collectedSource = "./images/collected.jpg";
+        const images = [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h"
+        ];
+
+        var field = [];
+        var currentlyShownImageName = null;
+        var currentlyShownImageId = -1;
+        var score = 0;
+        var counter = 0;
+
+        function onload() {
+            for (var i = 0; i < nrOfImgs; i++) {
+                let idx = Math.floor(i/2);
+                name = images[idx];
+                var obj = {
+                    isShown: false,
+                    imgSrc: "./images/" + name + ".gif",
+                    imgName: name
+                };
+
+                field.push(obj);
+            }
+
+            field = shuffle(field);
+        
+            drawField();
+        }
+
+        function shuffle(field) {
+            for (var i = 0; i < field.length; i++) {
+                let rdm1 = Math.floor(Math.random()*field.length);
+                let rdm2 = Math.floor(Math.random()*field.length);
+                field = swap(field, rdm1, rdm2);
+            }
+
+            return field;
+        }
+
+        function swap(field, idx1, idx2) {
+            var img1 = field[idx1];
+            field[idx1] = field[idx2];
+            field[idx2] = img1;
+
+            return field;
+        }
+
+        function drawField() {
+            for (var i = 0; i < field.length; i++) {
+                drawImage(field[i], i);
+            }
+        }
+
+        function drawImage(imgObj, idx) {
+            var img = document.getElementById(idx);
+            img.src = hiddenSource;
+            img.alt = imgObj.imgName;
+        }
+
+        function onclickImg(img) {
+            var idx = img.id;
+            var imgObj = field[idx];
+
+            if (imgObj.isShown == false) {
+                handleClickOnNewImg(img, imgObj);
+            }
+        }
+
+        function handleClickOnNewImg(img, imgObj) {
+            imgObj.isShown = true;
+            img.src = imgObj.imgSrc;
+
+            if (currentlyShownImageName == null) {
+                handleFirstImageClicked(img, imgObj);
+            } else {
+                handleSecondImageClicked(img, imgObj);                    
+            }
+        }
+
+        function handleFirstImageClicked(img, imgObj) {
+            currentlyShownImageName = imgObj.imgName;
+            currentlyShownImageId = img.id;
+        }
+
+        function handleSecondImageClicked(img, imgObj) {
+            if (areImgsSame(currentlyShownImageName, imgObj.imgName)) {
+                handleImgsAreSame(img);
+            } else {
+                handleImgsAreDifferent(img);
+            }
+
+            counter++;
+
+            updateCounters();
+        }
+        
+        function areImgsSame(name1, name2) {
+            return name1 == name2;
+        }
+
+        function handleImgsAreSame(img) {
+            score++;
+
+            setTimeout(remover, 1000);
+        
+            function remover() {
+                removeImages(currentlyShownImageId, img.id);
+                
+                reset();
+                checkIfDone();
+            }
+        } 
+
+        function removeImages(id1, id2) {
+            var img1 = document.getElementById(id1);
+            img1.src = collectedSource;
+
+            var img2 = document.getElementById(id2);
+            img2.src = collectedSource;
+        }
+
+        function handleImgsAreDifferent(img) {
+            setTimeout(hider, 1000);
+            
+            function hider() {
+                hideOpenImages(currentlyShownImageId, img.id);
+
+                reset();
+            }
+        }
+
+        function hideOpenImages(id1, id2) {
+            var img1 = document.getElementById(id1);
+            img1.src = hiddenSource;
+            field[id1].isShown = false;
+
+            var img2 = document.getElementById(id2);
+            img2.src = hiddenSource;
+            field[id2].isShown = false;
+        }
+
+        function checkIfDone() {
+            if (isDone()) {
+                alert("Yay! You did it! You finished in " + counter + " tries!");
+            }
+        }
+
+        function isDone() {
+            var doneCounter = 0;
+
+            for (var i = 0; i < field.length; i++) {
+                if (field[i].isShown)
+                    doneCounter++;
+            }
+
+            return doneCounter == field.length;
+        }
+
+        function reset() {
+            currentlyShownImageName = null;
+            currentlyShownImageId = -1;
+        }
+
+        function updateCounters() {
+            var pCounter = document.getElementById("counter");
+            pCounter.innerHTML = "Tries: " + counter;
+
+            var pScore = document.getElementById("score");
+            pScore.innerHTML = "Score: " + score;
+        }
+    </script>
+    <h1>Memory</h1>
+    <p id="counter">Tries: 0</p>
+    <p id="score">Score: 0</p>
+    <table>
+        <tr>
+            <td>
+                <image width="50px" id="0" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="1" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="2" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="3" onclick="onclickImg(this)"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <image width="50px" id="4" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="5" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="6" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="7" onclick="onclickImg(this)"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <image width="50px" id="8" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="9" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="10" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="11" onclick="onclickImg(this)"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <image width="50px" id="12" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="13" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="14" onclick="onclickImg(this)"/>
+            </td>
+            <td>
+                <image width="50px" id="15" onclick="onclickImg(this)"/>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
